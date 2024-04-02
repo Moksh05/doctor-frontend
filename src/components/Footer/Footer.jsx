@@ -51,7 +51,7 @@ const quickLinks02 = [
   },
   {
     path: "/",
-    display: "Fing a Location",
+    display: "Find a Location",
   },
   {
     path: "/",
