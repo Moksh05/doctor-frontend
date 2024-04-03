@@ -3,6 +3,7 @@ import { useState,useContext } from 'react'
 import { AuthContext } from '../context/authContext'
 import { BASE_URL } from '../config'; 
 import { toast } from 'react-toastify';
+import HashLoader from 'react-spinners/HashLoader';
 
 const Login = () => {
   const[formData, setFormData] = useState({
@@ -65,7 +66,7 @@ const Login = () => {
           <input className='w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer' type="password" placeholder='Password' name="password" value={formData.password} onChange={handleInputChange} required/>
           </div>
           <div className='mt-7'>
-            <button type='submit' className='w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3'>Login</button>
+            <button type='submit' className='w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3'>{loading ? <HashLoader size={35} color='#ffffff'/> : 'Login'}</button>
           </div>
           <p className='mt-5 text-textColor text-center'>Don&apos;t have an account? <Link to='/register' className='text-primaryColor font-medium ml-1'>Register</Link></p>
         </form>
