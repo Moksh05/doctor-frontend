@@ -37,11 +37,12 @@ const Login = () => {
       dispatch({
         type : "LOGIN_SUCCESS",
         payload : {
-          usere: result.data,
+          user: result.data,
           token: result.token,
           role: result.role
         },
       });
+      console.log()
       console.log(result);
       setLoading(false);
       toast.success(result.message);
