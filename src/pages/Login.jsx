@@ -42,8 +42,6 @@ const Login = () => {
           role: result.role
         },
       });
-      console.log()
-      console.log(result);
       setLoading(false);
       toast.success(result.message);
 
