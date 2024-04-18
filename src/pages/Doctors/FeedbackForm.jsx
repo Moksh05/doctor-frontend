@@ -1,12 +1,35 @@
 import React, { useState } from 'react'
 import {AiFillStar} from 'react-icons/ai'
+import { useParams } from "react-router-dom"
 
 const FeedbackForm = () => {
+    const { id } = useParams();
     const [rating, setRating] = useState(0)
     const [hover, setHover] = useState(0)
     const [reviewText, setReviewText] = useState("")
     const handleSubmitReview = async e=>{
         e.preventDefault();
+
+        try{
+            const response = await fetch(`http://localhost:5000/api/v1/doctors/${id}/reviews`,{
+                method : 'POST',
+                body : JSON.stringify({
+                    rating : rating,
+                    reviewText : reviewText
+                }),
+                headers : {
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                }
+            },
+        )
+
+        const resolvedResp=await response.json()
+        console.log(resolvedResp)
+        
+        }catch(e){
+            console.log(e)
+        }
     }
   return (
     <form action="">

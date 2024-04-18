@@ -1,9 +1,25 @@
-import React from 'react'
+import {useEffect, useState} from 'react'
 import DoctorCard from '../../components/Doctors/DoctorCard'
-import {doctors} from '../../assets/data/doctors'
+// import {doctors} from '../../assets/data/doctors'
 import Testimonial from '../../components/Testimonial/Testimonial'
 
 const Doctors = () => {
+  const [doctors,setDoctors]=useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:5000/api/v1/doctors/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response)
+      const resolevedData = await response.json();
+      setDoctors(resolevedData.data)
+      console.log(resolevedData); // Log the data to the console
+    };
+    fetchData();
+  }, []);
   return <>
     <section className='bg-[#fff9ea]'>
       <div className="container text-center">
