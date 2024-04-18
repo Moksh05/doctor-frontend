@@ -59,8 +59,8 @@ console.log(user._id)
                 <p className="text-textColor text-[15px] leading-6 font-medium">Blood Type: <span className="ml-2 text-headingColor text-[22px] leading-8">{userdata.bloodType}</span></p>
             </div>
             <div className="mt-[50px] md:mt-[100px]">
-                <button onClick={handleLogout} className="w-full bg-[#181A1E] p-3 text-[16px] leading-7 rounded-md text-white">Logout</button>
-                <button className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">Delete Account</button>
+                <button onClick={handleLogout} className="md:w-full w-[40%] bg-[#181A1E] p-3 text-[16px] leading-7 rounded-md text-white">Logout</button>
+                <button className="md:w-full w-[40%] bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">Delete Account</button>
             </div>
             </div>
             <div className="md:col-span-2 md:px-[30px]">

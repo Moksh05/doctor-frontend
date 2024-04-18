@@ -1,38 +1,21 @@
-import { AuthContext } from "../../context/authContext";
-import { useContext, useState, useEffect } from "react";
-import {BASE_URL} from '../../config'
-import DoctorCard  from './../../components/Doctors/DoctorCard'
-//import useFetchData from '../../hooks/useFetchData'
-import axios from 'axios';
 
 
 const MyBookings = () => {
-//     useEffect(() => {
-//         const fetchAppointments = async () => {
-//           try {
-//             // Make GET request to fetch appointments
-//             const response = await axios.get('/appointments/my-appointments');
-//             console.log(response)
-    
-//             // Update state with fetched appointments
-//             setAppointments(response.data.data);
-//           } catch (error) {
-//             console.error('Error fetching appointments:', error);
-//           }
-//         };
-    
-//         fetchAppointments();
-//       }, []);
-//     const [appointments, setAppointments] = useState([]);
-//   const { state } = useContext(AuthContext);
-//   const { user, role, token } = state;
-//   return (
-//     <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">{
-//         user.map(doctor=> <DoctorCard doctor={doctor} key={doctor._id}/>)
-//     }</div>
-//   )
-return(
-    <div>My Bookings</div>
+return(<>
+    <div className='w-[700px] md:w-[500px] p-4 shadow-lg rounded-lg mt-6'>
+        <div>
+        <h3 className="heading text-xl text-headingColor mb-2">Doctor Name</h3>
+        <span className="text-para bg-[#CCF0F3] text-irisBlueColor rounded-full px-2 my-2">Specialization</span>
+        </div>
+        <div className="flex flex-row justify-between pr-4 content-center text-textColor pl-2">
+            <div className="flex flex-col">
+                <p>Date</p>
+                <p>time slot</p>
+            </div>
+        <p>Status</p>
+        </div>
+    </div>
+    </>
 )
 }
 
