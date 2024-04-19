@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 const SidePanel = (doctors) => {
-    const {ticketPrice,timeSlots}= doctors.doctors
+    const {ticketPrice,timeSlots,_id}= doctors.doctors
     function extractDayAndTime(inputString) {
         try {
             const index = inputString.indexOf(' ');
@@ -14,6 +14,47 @@ const SidePanel = (doctors) => {
         }
     }
     const[show,setShow] = useState(false);
+    const [selectedCheckbox, setSelectedCheckbox] = useState(null);
+    const handleCheckboxChange = (index, timeSlot) => {
+        setSelectedCheckbox(prevState => (prevState === index ? null : index));
+    };
+    const postData = async()=>{
+        try{
+            console.log("working")
+            console.log(_id, ticketPrice)
+            //console.log(localStorage.getItem('token'))
+            console.log(ticketPrice)
+            const response = await fetch(`http://localhost:5000/api/v1/doctors/${_id}/booking`,{
+                method : 'POST',
+                body : JSON.stringify({
+                    ticketPrice : ticketPrice,
+                    appointmentDate : "time",
+                    status : "Pending",
+                    isPaid : true
+                }),
+                headers : {
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                }
+            },
+        )
+        console.log("Booking line 39")
+        const resolvedResp=await response.json()
+        console.log(resolvedResp)
+        
+        }catch(e){
+            console.log(e)
+        }
+    }
+    const handleBookAppointment = () => {
+        if (selectedCheckbox !== null) {
+            const timeSlot = timeSlots[selectedCheckbox];
+            console.log('Appointment booked for:', timeSlot);
+            postData();
+            
+        }
+        setShow(!show); 
+    };
   return (
     <div className='shadow-xl p-3 lg:p-5 rounded-md'>
         <div className='flex items-center justify-between'>
@@ -23,19 +64,26 @@ const SidePanel = (doctors) => {
         <div className='mt-[30px]'>
             <p className='text_para mt-0 font-semibold text-headingColor'>Available Time Slots:</p>
             <ul className='mt-3'>
-            {timeSlots.map((timeSlot,index)=> {
-    const { day, timeRange } = extractDayAndTime(timeSlot);
-    return (
-        <li key={index} className='flex items-center justify-between mb-2'>
-            <p className='text-[15px] leading-6 text-textColor font-semibold'>{day}</p>
-            <p className='text-[15px] leading-6 text-textColor font-semibold'>{timeRange}</p>
-        </li>
-    );
-})}
-            </ul>
+                {timeSlots.map((timeSlot, index) => {
+                    const { day, timeRange } = extractDayAndTime(timeSlot);
+                    return (
+                        <li key={index} className='flex items-center justify-between mb-2'>
+                            <p className='text-[15px] leading-6 text-textColor font-semibold'>{day}</p>
+                            <p className='text-[15px] leading-6 text-textColor font-semibold'>{timeRange}</p>
+                            <input 
+                                type="checkbox" 
+                                name="selected" 
+                                id={`selected-${index}`} 
+                                checked={selectedCheckbox === index} 
+                                onChange={() => handleCheckboxChange(index, timeSlot)} 
+                            />
+                        </li>
+                    );
+                })}
+                </ul>
+            </div>
+            <button className='btn px-2 w-full rounded-md' onClick={handleBookAppointment}>Book Appointment</button>
         </div>
-        <button className='btn px-2 w-full rounded-md' onClick={()=>{setShow(!show)}}>Book Appointment</button>
-    </div>
   )
 }
 
