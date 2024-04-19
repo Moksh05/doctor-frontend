@@ -37,7 +37,7 @@ const Doctors = () => {
       </div>
       </div>
     </section>
-    <section>
+    {/* <section>
     <div className='container'>
     <div className='xl:w-[470px] mx-auto'>
         <h2 className='heading text-center'>What our patients say</h2>
@@ -45,7 +45,7 @@ const Doctors = () => {
       </div>
       <Testimonial/>
     </div>
-  </section>
+  </section> */}
   </>
 }
 
