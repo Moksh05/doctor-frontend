@@ -11,7 +11,7 @@ const MyAccount = () => {
   const { user, role, token ,appointments} = state;
 //   console.log(state);
 //   console.log(user,role,token,appointments);
-console.log(user._id)
+//console.log(user._id)
   let temp=false;
   if(user) {temp = true;}
 
@@ -25,10 +25,10 @@ console.log(user._id)
           "Authorization" : `Bearer ${localStorage.getItem('token')}`
         },
       });
-      console.log(response)
+      //console.log(response)
       const resolevedData = await response.json();
       setUser(resolevedData.data)
-      console.log(resolevedData); // Log the data to the console
+      //console.log(resolevedData); // Log the data to the console
     };
     fetchData();
   }, [user._id]);
@@ -69,7 +69,7 @@ console.log(user._id)
                     <button onClick={()=>{setTab('settings')}} className={`${tab ==='settings' && 'bg-primaryColor text-white font-normal'}p-2 py-2 px-5 rounded-md text-headingColor font-semibold text-[16px] leading-7 border border-solid border-primaryColor`}>Profile Settings</button>
                 </div>
                 {
-                    tab ==='bookings' && <MyBookings/>
+                    tab ==='bookings' && <MyBookings userData={user}/>
                 }
                 {
                     tab ==='settings' && <Profile userData={user}/>

@@ -14,6 +14,8 @@ const SidePanel = (doctors) => {
         }
     }
     const[show,setShow] = useState(false);
+    let selectedtimeslot = ""
+    //const [selectedtimeslot,setselectedtimeslot] = useState()
     const [selectedCheckbox, setSelectedCheckbox] = useState(null);
     const handleCheckboxChange = (index, timeSlot) => {
         setSelectedCheckbox(prevState => (prevState === index ? null : index));
@@ -21,15 +23,15 @@ const SidePanel = (doctors) => {
     const postData = async()=>{
         try{
             console.log("working")
-            console.log(_id, ticketPrice)
-            //console.log(localStorage.getItem('token'))
             console.log(ticketPrice)
+            //console.log(localStorage.getItem('token'))
+            console.log(selectedtimeslot)
             const response = await fetch(`http://localhost:5000/api/v1/doctors/${_id}/booking`,{
                 method : 'POST',
                 body : JSON.stringify({
                     ticketPrice : ticketPrice,
-                    appointmentDate : "time",
-                    status : "Pending",
+                    appointmentDate :selectedtimeslot,
+                    status : 'pending',
                     isPaid : true
                 }),
                 headers : {
@@ -50,10 +52,14 @@ const SidePanel = (doctors) => {
         if (selectedCheckbox !== null) {
             const timeSlot = timeSlots[selectedCheckbox];
             console.log('Appointment booked for:', timeSlot);
+            selectedtimeslot = timeSlot
+            //setselectedtimeslot(timeSlot)
+            console.log(selectedtimeslot)
             postData();
             
         }
         setShow(!show); 
+        
     };
   return (
     <div className='shadow-xl p-3 lg:p-5 rounded-md'>
